@@ -1,0 +1,12 @@
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/bin/Debug/net8.0/BuyMyHouse.Domain.deps.json
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/bin/Debug/net8.0/BuyMyHouse.Domain.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/bin/Debug/net8.0/BuyMyHouse.Domain.pdb
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.AssemblyInfoInputs.cache
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.AssemblyInfo.cs
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.csproj.CoreCompileInputs.cache
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.sourcelink.json
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/refint/BuyMyHouse.Domain.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.pdb
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/ref/BuyMyHouse.Domain.dll
