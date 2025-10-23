@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyMyHouse.Domain", "src\Bu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyMyHouse.Infrastructure", "src\BuyMyHouse.Infrastructure\BuyMyHouse.Infrastructure.csproj", "{8BB2D5E5-BE53-48DF-9950-DA82E8AA327E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuyMyHouse.AzureFunctions", "src\BuyMyHouse.AzureFunctions\BuyMyHouse.AzureFunctions.csproj", "{C9AA157A-44BD-4A47-929E-1B09E018DD5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +34,15 @@ Global
 		{8BB2D5E5-BE53-48DF-9950-DA82E8AA327E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BB2D5E5-BE53-48DF-9950-DA82E8AA327E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BB2D5E5-BE53-48DF-9950-DA82E8AA327E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9AA157A-44BD-4A47-929E-1B09E018DD5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9AA157A-44BD-4A47-929E-1B09E018DD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9AA157A-44BD-4A47-929E-1B09E018DD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9AA157A-44BD-4A47-929E-1B09E018DD5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{088BBD64-CE79-490F-997E-0FB54C7DC642} = {812AF58C-3E3D-4A7D-853E-9EBA03D26ECA}
 		{D642B0D3-89F1-4EA7-BAFB-D6E38C5F0D5A} = {812AF58C-3E3D-4A7D-853E-9EBA03D26ECA}
 		{8BB2D5E5-BE53-48DF-9950-DA82E8AA327E} = {812AF58C-3E3D-4A7D-853E-9EBA03D26ECA}
+		{C9AA157A-44BD-4A47-929E-1B09E018DD5D} = {812AF58C-3E3D-4A7D-853E-9EBA03D26ECA}
 	EndGlobalSection
 EndGlobal
