@@ -3,6 +3,7 @@ using BuyMyHouse.Infrastructure.Database;
 using BuyMyHouse.Infrastructure.Repositories;
 using BuyMyHouse.Domain.Services;
 using Microsoft.EntityFrameworkCore;
+using BuyMyHouse.Infrastructure.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,11 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IMortgageApplicationRepository, MortgageApplicationRepository>();
 
 builder.Services.AddScoped<MortgageService>();
+
+string storageConnection = "UseDevelopmentStorage=true"; // for Azurite
+builder.Services.AddSingleton(new BlobService(storageConnection));
+builder.Services.AddSingleton(new QueueService(storageConnection));
+builder.Services.AddSingleton(new TableService(storageConnection));
 
 var app = builder.Build();
 

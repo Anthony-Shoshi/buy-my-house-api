@@ -8,6 +8,9 @@
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Azure.Core.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Azure.Data.Tables.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Azure.Identity.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Azure.Storage.Blobs.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Azure.Storage.Common.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Azure.Storage.Queues.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Humanizer.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Microsoft.AspNetCore.OpenApi.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/Microsoft.Bcl.AsyncInterfaces.dll
@@ -61,6 +64,7 @@
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/System.Drawing.Common.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/System.Formats.Asn1.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/System.IO.Hashing.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/System.IO.Pipelines.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/System.Memory.Data.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Api/bin/Debug/net8.0/System.Runtime.Caching.dll
