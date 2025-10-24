@@ -14,14 +14,6 @@ public class BlobService
         container.CreateIfNotExists();
     }
 
-    // public async Task<string> UploadFileAsync(string filePath, string fileName)
-    // {
-    //     var container = _client.GetBlobContainerClient(_containerName);
-    //     var blob = container.GetBlobClient(fileName);
-    //     await blob.UploadAsync(filePath, overwrite: true);
-    //     return blob.Uri.ToString();
-    // }
-
     public async Task<string> UploadFileAsync(string content, string fileName)
     {
         var container = _client.GetBlobContainerClient(_containerName);

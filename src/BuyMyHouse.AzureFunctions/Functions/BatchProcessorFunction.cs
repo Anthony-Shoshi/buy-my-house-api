@@ -60,8 +60,18 @@ public class BatchProcessorFunction
                     ValidUntil = DateTime.Now.AddDays(7)
                 };
 
-                string fileName = $"offer_{app.Id}.json";
-                string blobUrl = await _blobService.UploadFileAsync(JsonSerializer.Serialize(offer), fileName);
+                var offerText = $"""
+                Mortgage Offer
+                ---------------
+                ApplicationId: {app.Id}
+                CustomerName: {customerName}
+                OfferAmount: {_mortgageService.CalculateEligibleAmount(income)}
+                InterestRate: {_mortgageService.CalculateInterestRate(income)}
+                ValidUntil: {DateTime.Now.AddDays(7):yyyy-MM-dd}
+                """;
+
+                string fileName = $"offer_{app.Id}.txt";
+                string blobUrl = await _blobService.UploadFileAsync(offerText, fileName);
 
                 // Save income to Table storage
                 await _tableService.AddIncomeRecordAsync(customerName, income);
