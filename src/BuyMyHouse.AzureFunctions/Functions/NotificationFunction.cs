@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json;
 using Azure.Storage.Queues.Models;
-using BuyMyHouse.AzureFunctions.DTO;
+using BuyMyHouse.AzureFunctions.DTOs;
 using BuyMyHouse.Infrastructure.Services;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;

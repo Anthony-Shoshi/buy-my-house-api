@@ -1,6 +1,8 @@
 using System.Text.Json;
-using BuyMyHouse.AzureFunctions.DTO;
+using BuyMyHouse.AzureFunctions.DTOs;
 using BuyMyHouse.Domain.Entities;
+using BuyMyHouse.Domain.Enums;
+using BuyMyHouse.Domain.Services;
 using BuyMyHouse.Infrastructure.Database;
 using BuyMyHouse.Infrastructure.Storage;
 using Microsoft.Azure.Functions.Worker;
@@ -16,19 +18,22 @@ public class BatchProcessorFunction
     private readonly QueueService _queueService;
     private readonly TableService _tableService;
     private readonly ILogger<BatchProcessorFunction> _logger;
+    private readonly MortgageService _mortgageService;
 
     public BatchProcessorFunction(
         BuyMyHouseDbContext db,
         BlobService blobService,
         QueueService queueService,
         TableService tableService,
-        ILogger<BatchProcessorFunction> logger)
+        ILogger<BatchProcessorFunction> logger,
+        MortgageService mortgageService)
     {
         _db = db;
         _blobService = blobService;
         _queueService = queueService;
         _tableService = tableService;
         _logger = logger;
+        _mortgageService = mortgageService;
     }
 
     // Runs every day at 23:00 (set to */1 * * * * * for 1 min interval while testing)
@@ -37,9 +42,7 @@ public class BatchProcessorFunction
     {
         _logger.LogInformation("BatchProcessorFunction started at {time}", DateTime.Now);
 
-        var pendingApps = await _db.MortgageApplications
-            .Where(a => a.Status == "Pending")
-            .ToListAsync();
+        var pendingApps = await _mortgageService.GetPendingApplicationsAsync();
 
         foreach (var app in pendingApps)
         {
@@ -48,12 +51,12 @@ public class BatchProcessorFunction
                 var customerName = app.User?.FullName ?? "Unknown";
                 var income = app.AnnualIncome;
                 // Generate a simple mortgage offer JSON
-                var offer = new
+                var offer = new MortgageOfferDto
                 {
                     ApplicationId = app.Id,
                     CustomerName = customerName,
-                    OfferAmount = income * 5,
-                    InterestRate = 3.5,
+                    OfferAmount = _mortgageService.CalculateEligibleAmount(income),
+                    InterestRate = _mortgageService.CalculateInterestRate(income),
                     ValidUntil = DateTime.Now.AddDays(7)
                 };
 
@@ -79,7 +82,7 @@ public class BatchProcessorFunction
                 await _queueService.SendMessageAsync(payload);
                 _logger.LogInformation("Notification queued completed for application {id} at {time}", app.Id, DateTime.Now);
 
-                app.Status = "Processed";
+                app.Status = ApplicationStatus.Processed;
             }
             catch (Exception ex)
             {

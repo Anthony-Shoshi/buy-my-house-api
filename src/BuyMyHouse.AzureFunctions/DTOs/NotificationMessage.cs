@@ -1,4 +1,4 @@
-namespace BuyMyHouse.AzureFunctions.DTO;
+namespace BuyMyHouse.AzureFunctions.DTOs;
 
 public class NotificationMessage
 {
