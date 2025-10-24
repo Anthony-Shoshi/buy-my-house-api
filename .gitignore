@@ -1,0 +1,43 @@
+# ========================
+# .NET / C# ignores
+# ========================
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio / Rider / IDE files
+.vscode/
+.idea/
+*.vscode/
+*.resharper
+*.DotSettings.user
+
+# ========================
+# Azure Functions / local dev
+# ========================
+.local.settings.json
+/**/bin/
+**/obj/
+
+# Azure Functions temporary files
+extensions.csproj
+*.funcpack
+
+# ========================
+# Azurite / Storage Emulator
+# ========================
+__azurite_db_blob__.json
+__azurite_db_queue__.json
+__azurite_db_table__.json
+*.log
+
+# ========================
+# OS generated
+# ========================
+.DS_Store
+Thumbs.db
+*.bak
+*.swp

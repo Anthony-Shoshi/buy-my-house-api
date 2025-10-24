@@ -1,4 +1,5 @@
 using BuyMyHouse.Infrastructure.Database;
+using BuyMyHouse.Infrastructure.Services;
 using BuyMyHouse.Infrastructure.Storage;
 using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<BuyMyHouseDbContext>(options =>
 builder.Services.AddSingleton(new BlobService(storageConnection));
 builder.Services.AddSingleton(new QueueService(storageConnection));
 builder.Services.AddSingleton(new TableService(storageConnection));
+builder.Services.AddSingleton<EmailService>();
 
 var app = builder.Build();
 

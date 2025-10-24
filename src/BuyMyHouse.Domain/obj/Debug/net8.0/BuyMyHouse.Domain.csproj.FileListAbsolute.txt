@@ -10,3 +10,6 @@
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/refint/BuyMyHouse.Domain.dll
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/BuyMyHouse.Domain.pdb
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Domain/obj/Debug/net8.0/ref/BuyMyHouse.Domain.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.AzureFunctions/bin/output/BuyMyHouse.Domain.deps.json
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.AzureFunctions/bin/output/BuyMyHouse.Domain.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.AzureFunctions/bin/output/BuyMyHouse.Domain.pdb

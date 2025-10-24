@@ -16,3 +16,7 @@
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Infrastructure/obj/Debug/net8.0/BuyMyHouse.Infrastructure.pdb
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Infrastructure/obj/Debug/net8.0/BuyMyHouse.Infrastructure.genruntimeconfig.cache
 /Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.Infrastructure/obj/Debug/net8.0/ref/BuyMyHouse.Infrastructure.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.AzureFunctions/bin/output/BuyMyHouse.Infrastructure.deps.json
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.AzureFunctions/bin/output/BuyMyHouse.Infrastructure.runtimeconfig.json
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.AzureFunctions/bin/output/BuyMyHouse.Infrastructure.dll
+/Users/anthonyshoshigomes/Inholland/Year4/Cloud Databases/Project/buy-my-house/src/BuyMyHouse.AzureFunctions/bin/output/BuyMyHouse.Infrastructure.pdb

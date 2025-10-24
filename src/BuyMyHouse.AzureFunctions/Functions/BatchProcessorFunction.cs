@@ -1,4 +1,5 @@
 using System.Text.Json;
+using BuyMyHouse.AzureFunctions.DTO;
 using BuyMyHouse.Domain.Entities;
 using BuyMyHouse.Infrastructure.Database;
 using BuyMyHouse.Infrastructure.Storage;
@@ -32,7 +33,7 @@ public class BatchProcessorFunction
 
     // Runs every day at 23:00 (set to */1 * * * * * for 1 min interval while testing)
     [Function("BatchProcessorFunction")]
-    public async Task RunAsync([TimerTrigger("0 0 23 * * *")] TimerInfo timer)
+    public async Task RunAsync([TimerTrigger("*/1 * * * *")] TimerInfo timer)
     {
         _logger.LogInformation("BatchProcessorFunction started at {time}", DateTime.Now);
 
@@ -63,12 +64,20 @@ public class BatchProcessorFunction
                 await _tableService.AddIncomeRecordAsync(customerName, income);
 
                 // Add queue message for notification
-                await _queueService.SendMessageAsync(JsonSerializer.Serialize(new
+                _logger.LogInformation("Sending notification to queue for application {id} at {time}", app.Id, DateTime.Now);
+                var notification = new NotificationMessage
                 {
-                    app.Id,
+                    Id = app.Id,
                     CustomerName = customerName,
+                    CustomerEmail = app.User?.Email ?? "unknown@example.com",
                     BlobUrl = blobUrl
-                }));
+                };
+
+                var payload = JsonSerializer.Serialize(notification);
+                _logger.LogInformation("Queue payload: {payload}", payload);
+
+                await _queueService.SendMessageAsync(payload);
+                _logger.LogInformation("Notification queued completed for application {id} at {time}", app.Id, DateTime.Now);
 
                 app.Status = "Processed";
             }
