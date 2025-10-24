@@ -1,4 +1,5 @@
 using BuyMyHouse.Domain.Entities;
+using BuyMyHouse.Domain.Enums;
 using BuyMyHouse.Domain.Repositories;
 using BuyMyHouse.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,6 @@ public class MortgageApplicationRepository : Repository<MortgageApplication>, IM
 
     public async Task<IEnumerable<MortgageApplication>> GetPendingApplicationsAsync()
     {
-        return await _dbSet.Where(a => a.Status == "Pending").ToListAsync();
+        return await _dbSet.Where(a => a.Status == ApplicationStatus.Pending).ToListAsync();
     }
 }

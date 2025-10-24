@@ -1,3 +1,5 @@
+using BuyMyHouse.Domain.Enums;
+
 namespace BuyMyHouse.Domain.Entities;
 
 public class MortgageApplication
@@ -7,7 +9,7 @@ public class MortgageApplication
     public int HouseId { get; set; }
     public decimal AnnualIncome { get; set; }
     public decimal LoanAmountRequested { get; set; }
-    public string Status { get; set; } = "Pending";
+    public ApplicationStatus Status { get; set; } = ApplicationStatus.Pending;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public User? User { get; set; }
