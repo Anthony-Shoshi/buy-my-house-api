@@ -98,9 +98,8 @@ namespace BuyMyHouse.Infrastructure.Migrations
                     b.Property<decimal>("LoanAmountRequested")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

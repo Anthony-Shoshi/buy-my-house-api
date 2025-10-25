@@ -1,5 +1,6 @@
 using BuyMyHouse.Api.DTOs;
 using BuyMyHouse.Domain.Entities;
+using BuyMyHouse.Domain.Enums;
 using BuyMyHouse.Domain.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,7 +36,7 @@ public class ApplicationsController : ControllerBase
             HouseId = dto.HouseId,
             AnnualIncome = dto.AnnualIncome,
             LoanAmountRequested = dto.LoanAmountRequested,
-            Status = "Pending",
+            Status = ApplicationStatus.Pending,
             CreatedAt = DateTime.UtcNow
         };
 

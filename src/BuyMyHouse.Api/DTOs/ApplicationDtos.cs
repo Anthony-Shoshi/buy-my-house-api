@@ -1,3 +1,5 @@
+using BuyMyHouse.Domain.Enums;
+
 namespace BuyMyHouse.Api.DTOs;
 
 public record CreateApplicationDto(
@@ -13,6 +15,6 @@ public record ApplicationDto(
     int HouseId,
     decimal AnnualIncome,
     decimal LoanAmountRequested,
-    string Status,
+    ApplicationStatus Status,
     DateTime CreatedAt
 );

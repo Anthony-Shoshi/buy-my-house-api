@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BuyMyHouse.Infrastructure.Migrations
 {
     [DbContext(typeof(BuyMyHouseDbContext))]
-    [Migration("20251023185035_InitialCreate")]
+    [Migration("20251025015451_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -101,9 +101,8 @@ namespace BuyMyHouse.Infrastructure.Migrations
                     b.Property<decimal>("LoanAmountRequested")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

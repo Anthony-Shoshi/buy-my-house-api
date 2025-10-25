@@ -4,6 +4,7 @@ using BuyMyHouse.Infrastructure.Repositories;
 using BuyMyHouse.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using BuyMyHouse.Infrastructure.Storage;
+using BuyMyHouse.Infrastructure.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,13 @@ builder.Services.AddSingleton(new QueueService(storageConnection));
 builder.Services.AddSingleton(new TableService(storageConnection));
 
 var app = builder.Build();
+
+// using (var scope = app.Services.CreateScope())
+// {
+//     var db = scope.ServiceProvider.GetRequiredService<BuyMyHouseDbContext>();
+//     await db.Database.MigrateAsync();  // ensure DB schema is created
+//     await DbInitializer.SeedAsync(db); // seed your data
+// }
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
