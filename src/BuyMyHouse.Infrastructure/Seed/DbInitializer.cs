@@ -16,7 +16,7 @@ public static class DbInitializer
         var user1 = new User { FullName = "John Doe", Email = "gomesanthonyshoshi@gmail.com", Phone = "123-456-7890" };
         var user2 = new User { FullName = "Jane Smith", Email = "anthonyshoshigomes1996@gmail.com", Phone = "123-456-7890" };
         await context.Users.AddRangeAsync(user1, user2);
-        await context.SaveChangesAsync(); // 👈 important
+        await context.SaveChangesAsync();
 
         var house1 = new House
         {
