@@ -20,11 +20,15 @@ public class NotificationFunction
     }
 
     [Function(nameof(NotificationFunction))]
-    public async Task RunAsync([QueueTrigger("mortgage-notifications", Connection = "AzureWebJobsStorage")] QueueMessage message)
+    public async Task RunAsync([QueueTrigger("mortgage-notifications", Connection = "AzureWebJobsStorage")] string messageText)
     {
         _logger.LogInformation("NotificationFunction triggered at {time}", DateTime.Now);
 
-        var notification = JsonSerializer.Deserialize<NotificationMessage>(message.MessageText);
+        // var notification = JsonSerializer.Deserialize<NotificationMessage>(message.MessageText);
+        var notification = JsonSerializer.Deserialize<NotificationMessage>(messageText, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        });
 
         if (notification == null)
         {

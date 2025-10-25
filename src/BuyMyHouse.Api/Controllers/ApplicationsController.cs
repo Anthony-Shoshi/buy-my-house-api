@@ -24,15 +24,23 @@ public class ApplicationsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Submit([FromBody] CreateApplicationDto dto)
     {
-        var user = await _userRepo.GetByIdAsync(dto.UserId);
-        if (user == null) return BadRequest("User not found");
+        // 1️⃣ Create user
+        var user = new User
+        {
+            FullName = dto.FullName,
+            Email = dto.Email,
+            Phone = dto.Phone
+        };
+
+        await _userRepo.AddAsync(user);
+        await _userRepo.SaveChangesAsync();
 
         var house = await _houseRepo.GetByIdAsync(dto.HouseId);
         if (house == null) return BadRequest("House not found");
 
         var app = new MortgageApplication
         {
-            UserId = dto.UserId,
+            UserId = user.Id,
             HouseId = dto.HouseId,
             AnnualIncome = dto.AnnualIncome,
             LoanAmountRequested = dto.LoanAmountRequested,

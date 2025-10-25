@@ -12,6 +12,6 @@ public class MortgageApplicationRepository : Repository<MortgageApplication>, IM
 
     public async Task<IEnumerable<MortgageApplication>> GetPendingApplicationsAsync()
     {
-        return await _dbSet.Where(a => a.Status == ApplicationStatus.Pending).ToListAsync();
+        return await _dbSet.Where(a => a.Status == ApplicationStatus.Pending).Include(a => a.User).ToListAsync();
     }
 }

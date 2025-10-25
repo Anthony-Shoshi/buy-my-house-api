@@ -1,4 +1,7 @@
+using BuyMyHouse.Domain.Repositories;
+using BuyMyHouse.Domain.Services;
 using BuyMyHouse.Infrastructure.Database;
+using BuyMyHouse.Infrastructure.Repositories;
 using BuyMyHouse.Infrastructure.Services;
 using BuyMyHouse.Infrastructure.Storage;
 using Microsoft.Azure.Functions.Worker.Builder;
@@ -21,6 +24,12 @@ builder.Services.AddSingleton(new BlobService(storageConnection));
 builder.Services.AddSingleton(new QueueService(storageConnection));
 builder.Services.AddSingleton(new TableService(storageConnection));
 builder.Services.AddSingleton<EmailService>();
+
+builder.Services.AddScoped<MortgageService>();
+builder.Services.AddScoped<IMortgageApplicationRepository, MortgageApplicationRepository>();
+builder.Services.AddDbContext<BuyMyHouseDbContext>(options =>
+    options.UseSqlServer(Environment.GetEnvironmentVariable("BuyMyHouseDbConnection")));
+
 
 var app = builder.Build();
 
