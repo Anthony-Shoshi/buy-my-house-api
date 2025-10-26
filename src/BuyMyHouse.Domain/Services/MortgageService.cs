@@ -15,6 +15,9 @@ public class MortgageService
     public async Task<IEnumerable<MortgageApplication>> GetPendingApplicationsAsync()
         => await _appRepo.GetPendingApplicationsAsync();
 
+    public async Task<IEnumerable<MortgageApplication>> GetProcessedApplicationsAsync()
+        => await _appRepo.GetProcessedApplicationsAsync();
+
     public decimal CalculateEligibleAmount(decimal annualIncome)
     {
         // Simple rule: 5x annual income

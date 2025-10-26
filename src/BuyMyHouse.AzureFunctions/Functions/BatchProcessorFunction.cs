@@ -1,12 +1,9 @@
-using System.Text.Json;
 using BuyMyHouse.AzureFunctions.DTOs;
-using BuyMyHouse.Domain.Entities;
 using BuyMyHouse.Domain.Enums;
 using BuyMyHouse.Domain.Services;
 using BuyMyHouse.Infrastructure.Database;
 using BuyMyHouse.Infrastructure.Storage;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace BuyMyHouse.AzureFunctions.Functions;
@@ -15,7 +12,6 @@ public class BatchProcessorFunction
 {
     private readonly BuyMyHouseDbContext _db;
     private readonly BlobService _blobService;
-    private readonly QueueService _queueService;
     private readonly TableService _tableService;
     private readonly ILogger<BatchProcessorFunction> _logger;
     private readonly MortgageService _mortgageService;
@@ -30,7 +26,6 @@ public class BatchProcessorFunction
     {
         _db = db;
         _blobService = blobService;
-        _queueService = queueService;
         _tableService = tableService;
         _logger = logger;
         _mortgageService = mortgageService;
@@ -71,27 +66,11 @@ public class BatchProcessorFunction
                 """;
 
                 string fileName = $"offer_{app.Id}.txt";
-                string blobUrl = await _blobService.UploadFileAsync(offerText, fileName);
+                string blobUrl = await _blobService.UploadFileWithSasAsync(offerText, fileName, TimeSpan.FromHours(5));
 
                 // Save income to Table storage
                 await _tableService.AddIncomeRecordAsync(customerName, income);
-
-                // Add queue message for notification
-                _logger.LogInformation("Sending notification to queue for application {id} at {time}", app.Id, DateTime.Now);
-                var notification = new NotificationMessage
-                {
-                    Id = app.Id,
-                    CustomerName = customerName,
-                    CustomerEmail = app.User?.Email ?? "unknown@example.com",
-                    BlobUrl = blobUrl
-                };
-
-                var payload = JsonSerializer.Serialize(notification);
-                _logger.LogInformation("Queue payload: {payload}", payload);
-
-                await _queueService.SendMessageAsync(payload);
-                _logger.LogInformation("Notification queued completed for application {id} at {time}", app.Id, DateTime.Now);
-
+                
                 app.Status = ApplicationStatus.Processed;
             }
             catch (Exception ex)

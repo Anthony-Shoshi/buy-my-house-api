@@ -1,8 +1,8 @@
 {
-    "azureFunctions.deploySubpath": "src/AzureFunctions/bin/Release/net8.0/publish",
+    "azureFunctions.deploySubpath": "src/BuyMyHouse.AzureFunctions/bin/Release/net8.0/publish",
     "azureFunctions.projectLanguage": "C#",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
-    "azureFunctions.projectSubpath": "src/AzureFunctions",
+    "azureFunctions.projectSubpath": "src/BuyMyHouse.AzureFunctions",
     "azureFunctions.preDeployTask": "publish (functions)"
 }

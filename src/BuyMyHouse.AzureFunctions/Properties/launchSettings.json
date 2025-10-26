@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "AzureFunctions": {
+    "BuyMyHouse.AzureFunctions": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7243",
+      "commandLineArgs": "--port 7176",
       "launchBrowser": false
     }
   }

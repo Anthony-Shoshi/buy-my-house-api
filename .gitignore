@@ -9,7 +9,7 @@ obj/
 *.sln.docstates
 
 # Visual Studio / Rider / IDE files
-.vscode/
+
 .idea/
 *.vscode/
 *.resharper

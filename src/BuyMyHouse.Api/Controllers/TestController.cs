@@ -56,6 +56,28 @@ public class TestController : ControllerBase
         return Ok(new { url });
     }
 
+    [HttpGet("test-blob-sas")]
+    public async Task<IActionResult> TestBlobSas()
+    {
+        // Content for the blob (can also read a file if needed)
+        var offerText = $"""
+                Mortgage Offer
+                ---------------
+                ApplicationId: 12345
+                CustomerName: John Doe
+                OfferAmount: 300000
+                InterestRate: 3.5
+                ValidUntil: 2023-12-31
+                """;
+
+        string fileName = $"offer_12345.txt";
+
+        // Generate SAS URL valid for 5 minutes
+        var sasUrl = await _blobService.UploadFileWithSasAsync(offerText, fileName, TimeSpan.FromMinutes(5));
+
+        return Ok(new { sasUrl });
+    }
+
     // Queue test: send/receive message
     [HttpGet("queue")]
     public async Task<IActionResult> TestQueue()

@@ -6,7 +6,7 @@ using BuyMyHouse.Infrastructure.Services;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 
-namespace BuyMyHouse.AzureFunctions;
+namespace BuyMyHouse.AzureFunctions.Functions;
 
 public class NotificationFunction
 {
@@ -22,42 +22,27 @@ public class NotificationFunction
     [Function(nameof(NotificationFunction))]
     public async Task RunAsync([QueueTrigger("mortgage-notifications", Connection = "AzureWebJobsStorage")] string messageText)
     {
-        _logger.LogInformation("NotificationFunction triggered at {time}", DateTime.Now);
+        _logger.LogInformation("C# Queue trigger function processed: {messageText}", messageText);
 
-        // var notification = JsonSerializer.Deserialize<NotificationMessage>(message.MessageText);
-        var notification = JsonSerializer.Deserialize<NotificationMessage>(messageText, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        });
+        var notification = JsonSerializer.Deserialize<NotificationMessage>(messageText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-        if (notification == null)
-        {
-            _logger.LogWarning("Invalid message received");
-            return;
-        }
+        if (notification == null) return;
 
         string subject = $"Your Mortgage Offer from BuyMyHouse";
         string body = $"""
         Hello {notification.CustomerName},
 
-        Your mortgage offer is ready to view. You can access it securely at:
+        Your mortgage offer is ready to view:
         {notification.BlobUrl}
 
-        Please note that this link will expire soon.
+        This link will expire in 1 hour.
 
         Best regards,
         BuyMyHouse Team
         """;
 
-        try
-        {
-            await _emailService.SendEmailAsync(notification.CustomerEmail, subject, body);
-            _logger.LogInformation("Email sent successfully to {email}", notification.CustomerEmail);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to send email to {email}", notification.CustomerEmail);
-            throw; // so Azure Functions can retry
-        }
+        await _emailService.SendEmailAsync(notification.CustomerEmail, subject, body);
+
+        _logger.LogInformation("Email sent to {customerEmail} for application {appId}", notification.CustomerEmail, notification.Id);
     }
 }
