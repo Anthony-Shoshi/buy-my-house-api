@@ -58,8 +58,8 @@ BuyMyHouse/
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)  
 - [Visual Studio 2022 / VS Code](https://visualstudio.microsoft.com/)  
-- [Docker](https://www.docker.com/) (optional, for local SQL Server)  
-- Azure Subscription (Student Subscription works fine)
+- [Docker Desktop](https://www.docker.com/) (optional, for local SQL Server)  
+- Azure Subscription (Student Subscription works fine)/ Azurite
 
 ---
 
