@@ -1,9 +1,11 @@
 using Azure;
 using Azure.Data.Tables;
+using BuyMyHouse.Domain.Entities;
+using BuyMyHouse.Domain.Repositories;
 
 namespace BuyMyHouse.Infrastructure.Storage;
 
-public class TableService
+public class TableService : ITableService
 {
     private readonly TableClient _tableClient;
 
@@ -23,12 +25,22 @@ public class TableService
         await _tableClient.AddEntityAsync(entity);
     }
 
-    public async Task<IEnumerable<TableEntity>> GetIncomeRecordsAsync(string userId)
+    public async Task<IEnumerable<IncomeRecordTableEntity>> GetIncomeRecordsAsync(string userId)
     {
         var query = _tableClient.QueryAsync<TableEntity>(e => e.PartitionKey == userId);
-        var list = new List<TableEntity>();
+        var list = new List<IncomeRecordTableEntity>();
+
         await foreach (var entity in query)
-            list.Add(entity);
+        {
+            list.Add(new IncomeRecordTableEntity
+            {
+                PartitionKey = entity.PartitionKey,
+                RowKey = entity.RowKey,
+                AnnualIncome = (decimal)entity["AnnualIncome"],
+                RecordedAt = (DateTime)entity["RecordedAt"]
+            });
+        }
+
         return list;
     }
 }

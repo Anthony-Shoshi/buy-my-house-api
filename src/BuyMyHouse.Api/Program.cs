@@ -18,6 +18,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IMortgageApplicationRepository, MortgageApplicationRepository>();
 
+builder.Services.AddScoped<IBlobService>(_ => new BlobService(builder.Configuration.GetConnectionString("ConnectionStrings:BlobStorage")!));
+builder.Services.AddScoped<ITableService>(_ => new TableService(builder.Configuration.GetConnectionString("ConnectionStrings:TableStorage")!));
+builder.Services.AddScoped<IQueueService>(_ => new QueueService(builder.Configuration.GetConnectionString("ConnectionStrings:QueueStorage")!));
+
+
 builder.Services.AddScoped<MortgageService>();
 
 string storageConnection = "UseDevelopmentStorage=true"; // for Azurite

@@ -1,8 +1,9 @@
 using Azure.Storage.Queues;
+using BuyMyHouse.Domain.Repositories;
 
 namespace BuyMyHouse.Infrastructure.Storage;
 
-public class QueueService
+public class QueueService : IQueueService
 {
     private readonly QueueClient _queueClient;
 

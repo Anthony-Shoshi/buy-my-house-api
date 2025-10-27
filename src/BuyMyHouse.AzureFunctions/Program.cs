@@ -6,6 +6,7 @@ using BuyMyHouse.Infrastructure.Services;
 using BuyMyHouse.Infrastructure.Storage;
 using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -27,6 +28,11 @@ builder.Services.AddSingleton<EmailService>();
 
 builder.Services.AddScoped<MortgageService>();
 builder.Services.AddScoped<IMortgageApplicationRepository, MortgageApplicationRepository>();
+
+builder.Services.AddScoped<IBlobService>(_ => new BlobService(builder.Configuration.GetConnectionString("ConnectionStrings:BlobStorage")!));
+builder.Services.AddScoped<ITableService>(_ => new TableService(builder.Configuration.GetConnectionString("ConnectionStrings:TableStorage")!));
+builder.Services.AddScoped<IQueueService>(_ => new QueueService(builder.Configuration.GetConnectionString("ConnectionStrings:QueueStorage")!));
+
 builder.Services.AddDbContext<BuyMyHouseDbContext>(options =>
     options.UseSqlServer(Environment.GetEnvironmentVariable("BuyMyHouseDbConnection")));
 

@@ -1,4 +1,5 @@
 using BuyMyHouse.Domain.Entities;
+using BuyMyHouse.Domain.Repositories;
 using BuyMyHouse.Domain.Services;
 using BuyMyHouse.Infrastructure.Database;
 using BuyMyHouse.Infrastructure.Storage;
@@ -12,14 +13,14 @@ public class TestController : ControllerBase
 {
     private readonly BuyMyHouseDbContext _db;
     private readonly MortgageService _mortgageService;
-    private readonly BlobService _blobService;
-    private readonly QueueService _queueService;
-    private readonly TableService _tableService;
+    private readonly IBlobService _blobService;
+    private readonly IQueueService _queueService;
+    private readonly ITableService _tableService;
 
     public TestController(
         BuyMyHouseDbContext db,
         MortgageService mortgageService,
-        BlobService blobService,
+        IBlobService blobService,
         QueueService queueService,
         TableService tableService)
     {

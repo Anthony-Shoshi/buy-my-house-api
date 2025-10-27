@@ -1,14 +1,20 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
+using BuyMyHouse.Domain.Repositories;
 
 namespace BuyMyHouse.Infrastructure.Storage;
 
-public class BlobService
+public class BlobService : IBlobService
 {
     private readonly BlobServiceClient _client;
     private readonly string _containerName = "mortgage-docs";
 
-    public BlobService(string connectionString)
+    public BlobService(BlobServiceClient client)
+    {
+        _client = client ?? throw new ArgumentNullException(nameof(client));
+    }
+
+    public BlobService(string connectionString) : this(new BlobServiceClient(connectionString))
     {
         _client = new BlobServiceClient(connectionString);
         var container = _client.GetBlobContainerClient(_containerName);
