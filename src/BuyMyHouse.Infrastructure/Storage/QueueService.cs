@@ -15,7 +15,8 @@ public class QueueService : IQueueService
 
     public async Task SendMessageAsync(string message)
     {
-        await _queueClient.SendMessageAsync(message);
+        var bytes = System.Text.Encoding.UTF8.GetBytes(message);
+        await _queueClient.SendMessageAsync(Convert.ToBase64String(bytes));
     }
 
     public async Task<string?> ReceiveMessageAsync()

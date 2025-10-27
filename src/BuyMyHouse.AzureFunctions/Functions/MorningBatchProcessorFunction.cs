@@ -29,7 +29,7 @@ public class MorningBatchProcessorFunction
         _logger.LogInformation("Morning notification batch started at {time}", DateTime.Now);
 
         var processedApps = await _mortgageService.GetProcessedApplicationsAsync();
-        
+
         foreach (var app in processedApps)
         {
             var customerName = app.User?.FullName ?? "Unknown";
@@ -43,6 +43,9 @@ public class MorningBatchProcessorFunction
             };
 
             var payload = JsonSerializer.Serialize(notification);
+            
+            _logger.LogInformation("Payload: {payload}", payload);
+
             await _queueService.SendMessageAsync(payload);
 
             _logger.LogInformation("Notification queued for application {appId} of customer {customerName}", app.Id, customerName);

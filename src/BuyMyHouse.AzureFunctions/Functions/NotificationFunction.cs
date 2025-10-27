@@ -22,27 +22,47 @@ public class NotificationFunction
     [Function(nameof(NotificationFunction))]
     public async Task RunAsync([QueueTrigger("mortgage-notifications", Connection = "AzureWebJobsStorage")] string messageText)
     {
-        _logger.LogInformation("C# Queue trigger function processed: {messageText}", messageText);
+        NotificationMessage? notification = null;
 
-        var notification = JsonSerializer.Deserialize<NotificationMessage>(messageText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        try
+        {
+            notification = JsonSerializer.Deserialize<NotificationMessage>(messageText, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Failed to deserialize message: {messageText}", messageText);
+            return;
+        }
 
-        if (notification == null) return;
+        if (notification == null)
+        {
+            _logger.LogWarning("Message deserialized to null: {messageText}", messageText);
+            return;
+        }
 
-        string subject = $"Your Mortgage Offer from BuyMyHouse";
-        string body = $"""
-        Hello {notification.CustomerName},
+        try
+        {
+            string subject = $"Your Mortgage Offer from BuyMyHouse";
+            string body = $"""
+            Hello {notification.CustomerName},
 
-        Your mortgage offer is ready to view:
-        {notification.BlobUrl}
+            Your mortgage offer is ready to view:
+            {notification.BlobUrl}
 
-        This link will expire in 1 hour.
+            This link will expire in 1 hour.
 
-        Best regards,
-        BuyMyHouse Team
-        """;
+            Best regards,
+            BuyMyHouse Team
+            """;
 
-        await _emailService.SendEmailAsync(notification.CustomerEmail, subject, body);
+            await _emailService.SendEmailAsync(notification.CustomerEmail, subject, body);
 
-        _logger.LogInformation("Email sent to {customerEmail} for application {appId}", notification.CustomerEmail, notification.Id);
+            _logger.LogInformation("Email sent to {customerEmail} for application {appId}", notification.CustomerEmail, notification.Id);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to send email for message: {messageText}", messageText);
+            throw; // will retry / go to poison queue if transient
+        }
     }
 }
