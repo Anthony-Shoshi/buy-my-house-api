@@ -10,11 +10,8 @@
 - [Features](#features)  
 - [Prerequisites](#prerequisites)  
 - [Setup & Local Development](#setup--local-development)  
-- [Azure Configuration](#azure-configuration)  
-- [Deployment](#deployment)  
-- [Testing](#testing)  
-- [Environment Variables / App Settings](#environment-variables--app-settings)  
-- [License](#license)
+- [Run Azure Functions](#azure-functions)  
+- [Testing](#testing)
 
 ---
 
@@ -26,21 +23,21 @@ BuyMyHouse/
 
 ├─ src/
 
-    │ ├─ BuyMyHouse.Api/ # ASP.NET Core Web API (Controllers, Startup)
+    ├─ BuyMyHouse.Api/ # ASP.NET Core Web API (Controllers, Startup)
 
-    │ ├─ BuyMyHouse.Domain/ # Entities, Interfaces, Domain Services
+    ├─ BuyMyHouse.Domain/ # Entities, Interfaces, Domain Services
 
-    │ ├─ BuyMyHouse.Infrastructure/ # Database Context, Repositories, Azure Storage 
+    ├─ BuyMyHouse.Infrastructure/ # Database Context, Repositories, Azure Storage 
 
-    │ ├─ BuyMyHouse.AzureFunctions/ # Serverless functions
+    ├─ BuyMyHouse.AzureFunctions/ # Serverless functions
 
 ├─ tests/
 
-    │ ├─ BuyMyHouse.Tests/ # Unit and integration tests
+    ├─ BuyMyHouse.Tests/ # Unit and integration tests
 
 ├─ docker/
 
-    │ ├─ docker-compose.yml
+    ├─ docker-compose.yml
 
 
 ---
@@ -72,11 +69,67 @@ BuyMyHouse/
 
 ```bash
 git clone https://github.com/Anthony-Shoshi/buy-my-house-api/tree/main/src/BuyMyHouse.Api
+```
 
-cd BuyMyHouse/docker/
+2. **Change directory**
+```
+cd BuyMyHouse
+```
 
+3. **Go to docker folder to run sql server locally**
 
 ```bash
+cd docker
+```
+
+4. **Run this to start sql server**
+```bash
 docker-compose up -d
+```
+
+5. **Update appsettings.Development.json**
+```bash 
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost,1433;Database=BuyMyHouseDB;User Id=sa;Password=YourStrong!Passw0rd;TrustServerCertificate=True",
+    "BlobStorage": "UseDevelopmentStorage=true",
+    "QueueStorage": "UseDevelopmentStorage=true",
+    "TableStorage": "UseDevelopmentStorage=true"
+  }
+}
+```
+
+6. **Apply EF Core migrations**
+```bash
+cd src/BuyMyHouse.Infrastructure
+
+dotnet ef database update --startup-project ../BuyMyHouse.Api
+```
+
+7. **Run the Web API**
+```bash
+cd ../BuyMyHouse.Api
+
+dotnet run
+```
+
+This will seed some data and Swagger will be available at: https://localhost:5001/swagger
+
+## Azure Functions
+
+**Run all Azure Functions:**
+```bash
+cd src/BuyMyHouse.AzureFunctions
+dotnet func start
+```
+
+## Testing
+
+**Run all tests with:**
+```bash
+cd tests/BuyMyHouse.Tests
+
+dotnet test
+```
 
 
